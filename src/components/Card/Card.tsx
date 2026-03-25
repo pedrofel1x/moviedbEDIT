@@ -13,8 +13,10 @@ function Card({ content }: IMovieCard) {
   return (
     <div className={style.card}>
       <img src={`https://image.tmdb.org/t/p/w500${content.poster_path}`} />
-      <strong>{name}</strong>
-      <span></span>
+      <div className={style.info}>
+        <strong>{name}</strong>
+        <span>{content.vote_average.toFixed(1)}/10</span>
+      </div>
     </div>
   );
 }

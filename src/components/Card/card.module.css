@@ -1,0 +1,35 @@
+.card {
+  border: 1px solid #333;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  width: 100%;
+  flex: 0 0 200px;
+  margin: 2px;
+  & img {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 16px;
+    display: block;
+  }
+  transition: transform 0.3s ease;
+}
+.card:hover {
+  transform: scale(1.05);
+}
+
+.info {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  & strong {
+  }
+}
+h4 {
+  margin: 0;
+}

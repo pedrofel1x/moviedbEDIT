@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import type { ISerie } from "../types/Serie";
+import Card from "../components/Card/Card";
+
+import "./movielist.css";
 
 function SeriesList() {
   const [series, setSeries] = useState<ISerie[]>([]);
@@ -28,13 +31,14 @@ function SeriesList() {
   }, []);
 
   return (
-    <div>
-      {series.map((serie) => (
-        <div>
-          <h1>{serie.original_name}</h1>
-        </div>
-      ))}
-    </div>
+    <>
+      <h3>TV Shows</h3>
+      <div className="list">
+        {series.map((serie) => (
+          <Card content={serie} />
+        ))}
+      </div>
+    </>
   );
 }
 
