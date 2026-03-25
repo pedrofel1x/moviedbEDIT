@@ -1,0 +1,14 @@
+nav{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.navHome{
+    display:flex
+}
+
+.navButtons{
+    display:flex;
+    gap: 20px;
+}
