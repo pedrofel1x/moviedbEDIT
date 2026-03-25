@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { IMovie } from "../types/movie";
 import Card from "../components/Card/Card";
+import "./movielist.css"
 
 function MoviesList() {
   const [movies, setMovies] = useState<IMovie[]>([]);
@@ -29,7 +30,7 @@ function MoviesList() {
   }, []);
 
   return (
-    <div>
+    <div className="list">
       {movies.map((movie) => (
         <Card content={movie} />
       ))}
