@@ -1,4 +1,4 @@
-export interface actors {
+export interface IActor {
     adult: string;
     gender: number
     id: number;
