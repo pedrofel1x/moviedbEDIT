@@ -1,14 +1,19 @@
-nav{
-    display:flex;
-    flex-direction: row;
-    justify-content: space-around;
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 1rem 2rem;
+  gap: 16px;
+  border: 0.5px solid #33333317;
+  border-radius: 4px;
+  margin-bottom: 2rem;
 }
 
-.navHome{
-    display:flex
+.navHome {
+  display: flex;
 }
 
-.navButtons{
-    display:flex;
-    gap: 20px;
+.navButtons {
+  display: flex;
+  gap: 20px;
 }
