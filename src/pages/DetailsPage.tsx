@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { IMovie } from "../types/movie";
 import Card from "../components/Card/Card";
+import Actors from "../components/Actors/Actors";
 import styles from "./detailspage.module.css";
 
 function DetailsPage() {
@@ -44,6 +45,7 @@ function DetailsPage() {
       </div>
       <div className={styles.casting}>
         Actors
+        <Actors filme_id={filme} />
       </div>
     </div>
   );
