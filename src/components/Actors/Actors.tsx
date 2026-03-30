@@ -31,7 +31,11 @@ function Actors({ filme_id }: IActors) {
   return (
     <div>
       {actors.slice(0, 10).map((actor) => (
-        <p>{actor.original_name}</p>
+        <div>
+          <img src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`} />
+          <p>{actor.original_name}</p>
+          <p>{actor.character}</p>
+        </div>
       ))}
     </div>
   );
