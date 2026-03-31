@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import type { IActor } from "../../types/movie";
 import { useEffect, useState } from "react";
+import styles from "./actors.module.css";
 
 interface IActors {
   filme_id: number;
@@ -29,12 +30,17 @@ function Actors({ filme_id }: IActors) {
   }, []);
 
   return (
-    <div>
-      {actors.slice(0, 10).map((actor) => (
-        <div>
-          <img src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`} />
-          <p>{actor.original_name}</p>
-          <p>{actor.character}</p>
+    <div className={styles.content}>
+      {actors.slice(0, 12).map((actor) => (
+        <div className={styles.actorCard}>
+          <img
+            src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
+            alt={actor.original_name}
+          />
+          <div className={styles.actorCard_text}>
+            <strong>{actor.original_name}</strong>
+            <span>{actor.character}</span>
+          </div>
         </div>
       ))}
     </div>
