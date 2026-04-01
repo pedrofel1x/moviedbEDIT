@@ -1,12 +1,20 @@
 import { useEffect, useState } from "react";
 import type { IMovie } from "../types/movie";
 import Card from "../components/Card/Card";
-import "./movielist.css";
+import styles from "./movielist.module.css";
+import { Link } from "react-router-dom";
 
 function MoviesList() {
   const [movies, setMovies] = useState<IMovie[]>([]);
   console.log("movies", movies);
 
+  const [inputText, setInputText] = useState("");
+
+  const filteredMovies = movies.filter((movie) => {
+    const movieName = movie.original_title.toLowerCase();
+    const input = inputText.toLowerCase();
+    return movieName.includes(input);
+  });
   useEffect(() => {
     const options = {
       method: "GET",
@@ -27,17 +35,27 @@ function MoviesList() {
       setMovies(moviesList.results);
     };
     fetchData();
-  }, []);
+  }, [movies, inputText]);
 
   return (
-    <>
+    <div className={styles.container}>
       <h3>Movies</h3>
+      <input
+        type="text"
+        placeholder="Search Movie"
+        onChange={(event) => {
+          console.log("value", event.target.value);
+          setInputText(event.target.value);
+        }}
+      ></input>
       <div className="list">
-        {movies.map((movie) => (
-          <Card content={movie} />
+        {filteredMovies.map((movie) => (
+          <Link to={"/moviesList/" + movie.id}>
+            <Card content={movie} />
+          </Link>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
