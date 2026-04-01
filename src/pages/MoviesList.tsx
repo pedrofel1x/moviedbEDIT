@@ -35,7 +35,7 @@ function MoviesList() {
       setMovies(moviesList.results);
     };
     fetchData();
-  }, [movies, inputText]);
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -47,8 +47,8 @@ function MoviesList() {
           console.log("value", event.target.value);
           setInputText(event.target.value);
         }}
-      ></input>
-      <div className="list">
+      />
+      <div className={styles.list}>
         {filteredMovies.map((movie) => (
           <Link to={"/moviesList/" + movie.id}>
             <Card content={movie} />

@@ -2,11 +2,20 @@ import { useEffect, useState } from "react";
 import type { ISerie } from "../types/Serie";
 import Card from "../components/Card/Card";
 
-import "./movielist.css";
+import styles from "./movielist.module.css";
+import { Link } from "react-router-dom";
 
 function SeriesList() {
   const [series, setSeries] = useState<ISerie[]>([]);
   console.log("series", series);
+
+  const [inputText, setInputText] = useState("");
+
+  const filteredSeries = series.filter((serie) => {
+    const serieName = serie.original_name.toLowerCase();
+    const input = inputText.toLowerCase();
+    return serieName.includes(input);
+  });
 
   useEffect(() => {
     const options = {
@@ -31,14 +40,24 @@ function SeriesList() {
   }, []);
 
   return (
-    <>
+    <div className={styles.container}>
+      <input
+        type="text"
+        placeholder="Search Movie"
+        onChange={(event) => {
+          console.log("value", event.target.value);
+          setInputText(event.target.value);
+        }}
+      />{" "}
       <h3>TV Shows</h3>
-      <div className="list">
-        {series.map((serie) => (
-          <Card content={serie} />
+      <div className={styles.list}>
+        {filteredSeries.map((serie) => (
+          <Link to={"/seriesList/" + serie.id}>
+            <Card content={serie} />
+          </Link>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
