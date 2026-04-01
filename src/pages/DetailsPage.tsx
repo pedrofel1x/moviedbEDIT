@@ -7,10 +7,11 @@ import styles from "./detailspage.module.css";
 import Botao from "../components/Botao/Botao";
 
 function DetailsPage() {
-  const { filme } = useParams();
+  const { filme, serie } = useParams();
   console.log(filme);
 
-  const [movie, setMovie] = useState<IMovie>();
+  const selected = filme || serie;
+  const [item, setItem] = useState<IMovie>();
 
   useEffect(() => {
     const options = {
@@ -23,18 +24,19 @@ function DetailsPage() {
     };
 
     const fetchData = async () => {
+      const type = filme ? "movie" : "tv";
       const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${filme}`,
+        `https://api.themoviedb.org/3/${type}/${selected}`,
         options,
       );
       const data = await response.json();
       console.log("movie", data);
-      setMovie(data);
+      setItem(data);
     };
     fetchData();
-  }, [filme]);
+  }, [selected]);
 
-    return (
+  return (
     <div className={styles.content}>
       <Link to="/moviesList">
         <Botao variant="primary"> Back to list</Botao>
@@ -44,12 +46,12 @@ function DetailsPage() {
       </div>
       <div className={styles.chips}>Chips</div>
       <div className={styles.title}>
-        <h2>{movie?.original_title}</h2>
-        <h4>{movie?.overview}</h4>
+        <h2>{item?.original_title || item?.name}</h2>
+        <h4>{item?.overview}</h4>
       </div>
       <div className={styles.casting}>
         Actors
-        <Actors filme_id={filme} />
+        <Actors filme_id={selected} />
       </div>
     </div>
   );
