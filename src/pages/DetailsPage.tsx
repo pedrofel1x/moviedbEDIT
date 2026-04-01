@@ -38,7 +38,7 @@ function DetailsPage() {
 
   return (
     <div className={styles.content}>
-      <Link to="/moviesList">
+      <Link to={filme ? "/moviesList" : "/seriesList"}>
         <Botao variant="primary"> Back to list</Botao>
       </Link>
       <div className={styles.poster}>
