@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import type { IMovie } from "../types/movie";
 import Card from "../components/Card/Card";
 import Actors from "../components/Actors/Actors";
 import styles from "./detailspage.module.css";
+import Botao from "../components/Botao/Botao";
 
 function DetailsPage() {
   const { filme } = useParams();
@@ -33,8 +34,11 @@ function DetailsPage() {
     fetchData();
   }, [filme]);
 
-  return (
+    return (
     <div className={styles.content}>
+      <Link to="/moviesList">
+        <Botao variant="primary"> Back to list</Botao>
+      </Link>
       <div className={styles.poster}>
         <h1>Imagem</h1>
       </div>
