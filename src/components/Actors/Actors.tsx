@@ -6,7 +6,7 @@ import styles from "./actors.module.css";
 interface IActors {
   filme_id: number;
 }
-function Actors({ filme_id }: IActors) {
+function Actors({ filme_id, type }: IActors) {
   const [actors, setActors] = useState<IActor[]>([]);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function Actors({ filme_id }: IActors) {
     };
     const fetchActors = async () => {
       const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${filme_id}/credits`,
+        `https://api.themoviedb.org/3/${type}/${filme_id}/credits`,
         options,
       );
       const data = await response.json();
@@ -31,7 +31,7 @@ function Actors({ filme_id }: IActors) {
 
   return (
     <div className={styles.content}>
-      {actors.slice(0, 12).map((actor) => (
+      {actors.slice(0, 10).map((actor) => (
         <div className={styles.actorCard}>
           <img
             src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
