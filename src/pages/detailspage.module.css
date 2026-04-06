@@ -9,6 +9,8 @@
   position: absolute;
   inset: 0;
   height: 100%;
+  object-fit: cover; /* não distorce */
+  object-position: center;
   background-size: cover;
   background-position: center top;
   overlay: auto;
@@ -19,6 +21,8 @@
   content: "";
   position: absolute;
   inset: 0;
+  object-fit: cover; /* não distorce */
+  object-position: center;
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.2) 0%,
@@ -67,4 +71,17 @@
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
+}
+
+.chipcontent {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.similarList {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 20px;
 }
