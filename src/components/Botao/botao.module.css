@@ -5,6 +5,7 @@ button {
   gap: 4px;
   border-radius: 20px;
   cursor: pointer;
+  align-items: center;
 }
 
 button:hover {
@@ -12,13 +13,13 @@ button:hover {
 }
 
 .primary {
-  background-color: white;
+  background-color: #3a21d9;
   padding: 4px 8px;
   color: black;
 }
 
 .secondary {
-  background-color: black;
+  background-color: #515053;
   padding: 4px 8px;
   color: white;
 }
