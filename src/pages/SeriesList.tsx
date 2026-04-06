@@ -113,9 +113,7 @@ function SeriesList() {
         <button onClick={() => setPage((p) => p - 1)} disabled={page === 1}>
           <ArrowLeft />
         </button>
-        <span>
-          {page} / {totalPages}
-        </span>
+        <span>{page}</span>
         <button
           onClick={() => setPage((p) => p + 1)}
           disabled={page === totalPages}
