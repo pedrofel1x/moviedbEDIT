@@ -3,8 +3,12 @@ import type { IMovie } from "../types/movie";
 import Card from "../components/Card/Card";
 import styles from "./movielist.module.css";
 import { Link } from "react-router-dom";
+import ArrowLeft from "../components/Icons/ArrowLeft";
+import ArrowRight from "../components/Icons/ArrowRight";
 
 function MoviesList() {
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [movies, setMovies] = useState<IMovie[]>([]);
   console.log("movies", movies);
 
@@ -26,16 +30,21 @@ function MoviesList() {
     };
 
     const fetchData = async () => {
-      const response = await fetch(
-        "https://api.themoviedb.org/3/discover/movie",
-        options,
-      );
+      const url = inputText
+        ? `https://api.themoviedb.org/3/search/movie?query=${inputText}&page=${page}`
+        : `https://api.themoviedb.org/3/discover/movie?page=${page}`;
+      const response = await fetch(url, options);
       const moviesList = await response.json();
       console.log("moviesList", moviesList);
       setMovies(moviesList.results);
+      setTotalPages(moviesList.total_pages);
     };
     fetchData();
-  }, []);
+  }, [page, inputText]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [inputText]);
 
   return (
     <div className={styles.container}>
@@ -54,6 +63,20 @@ function MoviesList() {
             <Card content={movie} />
           </Link>
         ))}
+      </div>
+      <div className={styles.pages}>
+        <button onClick={() => setPage((p) => p - 1)} disabled={page === 1}>
+          <ArrowLeft />
+        </button>
+        <span>
+          {page} / {totalPages}
+        </span>
+        <button
+          onClick={() => setPage((p) => p + 1)}
+          disabled={page === totalPages}
+        >
+          <ArrowRight />
+        </button>
       </div>
     </div>
   );
