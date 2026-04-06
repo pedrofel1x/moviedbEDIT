@@ -4,8 +4,12 @@ import Card from "../components/Card/Card";
 
 import styles from "./movielist.module.css";
 import { Link } from "react-router-dom";
+import ArrowLeft from "../components/Icons/ArrowLeft";
+import ArrowRight from "../components/Icons/ArrowRight";
 
 function SeriesList() {
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [series, setSeries] = useState<ISerie[]>([]);
   console.log("series", series);
 
@@ -28,16 +32,21 @@ function SeriesList() {
     };
 
     const fetchData = async () => {
-      const response = await fetch(
-        "https://api.themoviedb.org/3/discover/tv",
-        options,
-      );
+      const url = inputText
+        ? `https://api.themoviedb.org/3/search/tv?query=${inputText}&page=${page}`
+        : `https://api.themoviedb.org/3/discover/tv?page=${page}`;
+      const response = await fetch(url, options);
       const seriesList = await response.json();
       console.log("seriesList", seriesList);
       setSeries(seriesList.results);
+      setTotalPages(seriesList.total_pages);
     };
     fetchData();
-  }, []);
+  }, [page, inputText]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [inputText]);
 
   return (
     <div className={styles.container}>
@@ -56,6 +65,20 @@ function SeriesList() {
             <Card content={serie} />
           </Link>
         ))}
+      </div>
+      <div className={styles.pages}>
+        <button onClick={() => setPage((p) => p - 1)} disabled={page === 1}>
+          <ArrowLeft />
+        </button>
+        <span>
+          {page} / {totalPages}
+        </span>
+        <button
+          onClick={() => setPage((p) => p + 1)}
+          disabled={page === totalPages}
+        >
+          <ArrowRight />
+        </button>
       </div>
     </div>
   );
