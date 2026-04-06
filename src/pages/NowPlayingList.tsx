@@ -31,7 +31,7 @@ function NowPlayingList() {
 
   return (
     <div className={styles.container}>
-      <h3>Upcoming</h3>
+      <h3>Now Playing</h3>
       <div className={styles.list}>
         {popular.map((popular) => (
           <Link to={"/moviesList/" + popular.id}>
