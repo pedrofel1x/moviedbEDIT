@@ -5,6 +5,7 @@ import styles from "./movielist.module.css";
 import { Link } from "react-router-dom";
 import ArrowLeft from "../components/Icons/ArrowLeft";
 import ArrowRight from "../components/Icons/ArrowRight";
+import Lupa from "../components/Icons/Lupa";
 import Chip from "../components/Chip/Chip";
 
 function MoviesList() {
@@ -72,14 +73,19 @@ function MoviesList() {
   return (
     <div className={styles.container}>
       <h3>Movies</h3>
-      <input
-        type="text"
-        placeholder="Search Movie"
-        onChange={(event) => {
-          console.log("value", event.target.value);
-          setInputText(event.target.value);
-        }}
-      />
+      <div className={styles.searchBar}>
+        <Lupa />
+        <input
+          type="text"
+          placeholder="Search Movie"
+          className={styles.input}
+          onChange={(event) => {
+            console.log("value", event.target.value);
+            setInputText(event.target.value);
+          }}
+        />
+      </div>
+
       <div className={styles.genres}>
         <Chip
           key="all"
