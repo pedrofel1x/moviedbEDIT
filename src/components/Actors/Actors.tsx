@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import type { IActor } from "../../types/movie";
+import type { IActor } from "../../types/actors";
 import { useEffect, useState } from "react";
 import styles from "./actors.module.css";
 
