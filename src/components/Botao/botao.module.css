@@ -2,14 +2,21 @@ button {
   border: none;
   background: none;
   display: flex;
-  gap: 4px;
-  border-radius: 20px;
+  margin: 2px;
+  height: 100%;
+  box-sizing: border-box;
+  font-size: 16px;
+  padding: 8px 16px;
+  border-radius: 10px;
   cursor: pointer;
   align-items: center;
 }
 
 button:hover {
   background-color: lightgray;
+}
+
+button:active {
 }
 
 .primary {
