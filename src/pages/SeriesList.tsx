@@ -41,6 +41,7 @@ function SeriesList() {
 
   return (
     <div className={styles.container}>
+      <h3>TV Shows</h3>
       <input
         type="text"
         placeholder="Search Movie"
@@ -49,7 +50,6 @@ function SeriesList() {
           setInputText(event.target.value);
         }}
       />{" "}
-      <h3>TV Shows</h3>
       <div className={styles.list}>
         {filteredSeries.map((serie) => (
           <Link to={"/seriesList/" + serie.id}>
