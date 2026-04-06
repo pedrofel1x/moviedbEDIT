@@ -7,8 +7,11 @@ import styles from "./detailspage.module.css";
 import Botao from "../components/Botao/Botao";
 import Chip from "../components/Chip/Chip";
 import type { ISerie } from "../types/Serie";
-import Star from "../components/Icons/Start";
-import Arrow from "../components/Icons/Arrow";
+import Star from "../components/Icons/Star";
+import ArrowLeft from "../components/Icons/ArrowLeft";
+
+import ArrowRight from "../components/Icons/ArrowRight";
+import Heart from "../components/Icons/Heart";
 
 function DetailsPage() {
   const { filme, serie } = useParams();
@@ -16,7 +19,7 @@ function DetailsPage() {
 
   const selected = filme || serie;
   const [item, setItem] = useState<IMovie | ISerie>();
-
+  const [similarMovies, setSimilarMovies] = useState<IMovie[]>([]);
   useEffect(() => {
     const options = {
       method: "GET",
@@ -36,6 +39,13 @@ function DetailsPage() {
       const data = await response.json();
       console.log("movie", data);
       setItem(data);
+
+      const similarResponse = await fetch(
+        `https://api.themoviedb.org/3/${type}/${selected}/similar?language=en-US&page=1`,
+        options,
+      );
+      const similarData = await similarResponse.json();
+      setSimilarMovies(similarData.results.slice(0, 6));
     };
     fetchData();
   }, [selected]);
@@ -46,7 +56,7 @@ function DetailsPage() {
         <Link to={filme ? "/moviesList" : "/seriesList"}>
           <Botao variant="primary">
             {" "}
-            <Arrow />
+            <ArrowLeft />
           </Botao>
         </Link>
       </div>
@@ -60,19 +70,22 @@ function DetailsPage() {
         <div className={styles.poster}>
           <img src={`https://image.tmdb.org/t/p/w500${item?.poster_path}`} />
         </div>
-        <div className={styles.info}>
-          <div className={styles.chips}>
-            {item?.genres?.map((genre) => (
-              <Chip key={genre.id} name={genre.name} />
-            ))}
-          </div>
-          <div className={styles.rating}>
-            <p>
-              {item?.vote_average.toFixed(1)}
-              <Star />
-            </p>
-            <p>{item?.release_date}</p>
-          </div>
+        <div className={styles.info}></div>
+      </div>
+
+      <div className={styles.chipcontent}>
+        <div className={styles.chips}>
+          <Chip
+            name={item?.vote_average.toFixed(1)}
+            icon={<Star active={true} />}
+          />
+
+          {item?.genres?.map((genre) => (
+            <Chip key={genre.id} name={genre.name} />
+          ))}
+        </div>
+        <div className={styles.heart}>
+          <Heart />
         </div>
       </div>
       <div className={styles.title}>
@@ -80,10 +93,27 @@ function DetailsPage() {
         <h4>{item?.overview}</h4>
       </div>
       <div className={styles.casting}>
+        <h3>Actors</h3>
         <Actors filme_id={selected} type={filme ? "movie" : "tv"} />
+      </div>
+      <div className={styles.similar}>
+        <h3>Recommended</h3>
+        <div className={styles.similarList}>
+          {similarMovies.map((movie) => (
+            <Link
+              key={movie.id}
+              to={`/${filme ? "moviesList" : "seriesList"}/${movie.id}`}
+            >
+              <Card content={movie} />
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
 export default DetailsPage;
+function setSimilarMovies(arg0: any) {
+  throw new Error("Function not implemented.");
+}
