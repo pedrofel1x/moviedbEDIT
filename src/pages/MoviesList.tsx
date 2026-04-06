@@ -5,10 +5,13 @@ import styles from "./movielist.module.css";
 import { Link } from "react-router-dom";
 import ArrowLeft from "../components/Icons/ArrowLeft";
 import ArrowRight from "../components/Icons/ArrowRight";
+import Chip from "../components/Chip/Chip";
 
 function MoviesList() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [genreList, setGenreList] = useState<IMovie[]>([]);
+  const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
   const [movies, setMovies] = useState<IMovie[]>([]);
   console.log("movies", movies);
 
@@ -32,7 +35,7 @@ function MoviesList() {
     const fetchData = async () => {
       const url = inputText
         ? `https://api.themoviedb.org/3/search/movie?query=${inputText}&page=${page}`
-        : `https://api.themoviedb.org/3/discover/movie?page=${page}`;
+        : `https://api.themoviedb.org/3/discover/movie?page=${page}${selectedGenre ? `&with_genres=${selectedGenre}` : ""}`;
       const response = await fetch(url, options);
       const moviesList = await response.json();
       console.log("moviesList", moviesList);
@@ -40,11 +43,31 @@ function MoviesList() {
       setTotalPages(moviesList.total_pages);
     };
     fetchData();
-  }, [page, inputText]);
+  }, [page, inputText, selectedGenre]);
 
   useEffect(() => {
     setPage(1);
   }, [inputText]);
+
+  useEffect(() => {
+    const fetchGenres = async () => {
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzRjM2ZlOWIyZGQ5YmQxNTQzYzhlZWRiYTU0ZTkzMSIsIm5iZiI6MTc0MjE1NzE2My4wMjksInN1YiI6IjY3ZDczNTZiMzE1MzhkZTYwOGYxYmFhMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.g1NFgZQFkQCTa6A5ffKDJXyLcmnKxXKA2xoTRTViHcE",
+        },
+      };
+      const response = await fetch(
+        "https://api.themoviedb.org/3/genre/movie/list",
+        options,
+      );
+      const data = await response.json();
+      setGenreList(data.genres);
+    };
+    fetchGenres();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -57,6 +80,22 @@ function MoviesList() {
           setInputText(event.target.value);
         }}
       />
+      <div className={styles.genres}>
+        <Chip
+          key="all"
+          name="All"
+          onClick={() => setSelectedGenre(null)}
+          active={selectedGenre === null}
+        />
+        {genreList.map((genre) => (
+          <Chip
+            key={genre.id}
+            name={genre.name}
+            onClick={() => setSelectedGenre(genre.id)}
+            active={selectedGenre === genre.id}
+          />
+        ))}
+      </div>
       <div className={styles.list}>
         {filteredMovies.map((movie) => (
           <Link to={"/moviesList/" + movie.id}>
