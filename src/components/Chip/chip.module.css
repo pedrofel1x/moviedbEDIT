@@ -2,8 +2,18 @@
   border-radius: 10px;
   background-color: #515053;
   font-size: 16px;
-  padding: 5px;
+  padding: 8px 16px;
   gap: 5px;
   margin: 2px;
-  opacity: 1;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+  height: 100%;
+  box-sizing: border-box;
+  line-height: 1.2;
+}
+.chip svg {
+  display: block;
+  flex-shrink: 0;
 }
