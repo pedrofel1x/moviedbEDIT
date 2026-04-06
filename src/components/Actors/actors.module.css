@@ -20,9 +20,10 @@
     object-fit: cover; /* não distorce */
     object-position: center;
     transition: 0.15s ease-in;
+    padding: 5px;
   }
   & img:hover {
-    border-radius: 35%;
+    scale: 110%;
   }
 }
 
