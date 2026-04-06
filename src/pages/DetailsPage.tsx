@@ -7,6 +7,7 @@ import styles from "./detailspage.module.css";
 import Botao from "../components/Botao/Botao";
 import Chip from "../components/Chip/Chip";
 import type { ISerie } from "../types/Serie";
+import Star from "../components/Icons/Start";
 
 function DetailsPage() {
   const { filme, serie } = useParams();
@@ -54,16 +55,21 @@ function DetailsPage() {
         <div className={styles.poster}>
           <img src={`https://image.tmdb.org/t/p/w500${item?.poster_path}`} />
         </div>
-        <div></div>
-        <div className={styles.chips}>
-          {/* {item?.genres.map(genre) => (
-        <Chip key={genre.id} name={genre.name} /> 
-        )} */}
+        <div className={styles.info}>
+          <div className={styles.chips}>
+            {item?.genres?.map((genre) => (
+              <Chip key={genre.id} name={genre.name} />
+            ))}
+          </div>
+          <div className={styles.rating}>
+            <span>{item?.vote_average.toFixed(1)}/10</span>
+            <Star />
+          </div>
         </div>
       </div>
       <div className={styles.title}>
-        <h2>{item?.original_title || item?.original_name}</h2>
-        <span>{item?.overview}</span>
+        <h2>{item?.title || item?.name}</h2>
+        <h4>{item?.overview}</h4>
       </div>
       <div className={styles.casting}>
         <Actors filme_id={selected} type={filme ? "movie" : "tv"} />

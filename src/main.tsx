@@ -9,6 +9,7 @@ import NavBar from "./components/NavBar/NavBar.tsx";
 import SeriesList from "./pages/SeriesList.tsx";
 import Card from "./components/Card/Card.tsx";
 import DetailsPage from "./pages/DetailsPage.tsx";
+import PopularList from "./pages/PopularList.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -27,6 +28,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path=":serie" element={<DetailsPage />} />
         </Route>
       </Routes>
+      <PopularList />
     </BrowserRouter>
     {/* <MoviesList />
     <SeriesList /> */}

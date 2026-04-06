@@ -7,7 +7,6 @@ interface IBotao {
 
 function Botao({ children, variant }: IBotao) {
   return <button className={styles[variant]}>{children}</button>;
-  console.log("botao");
 }
 
 export default Botao;

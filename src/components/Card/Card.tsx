@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import type { IMovie } from "../../types/movie";
 import type { ISerie } from "../../types/Serie";
 import style from "./card.module.css";
@@ -10,6 +11,7 @@ function Card({ content }: IMovieCard) {
     `original_title` in content
       ? content.original_title
       : content.original_name;
+
   return (
     <div className={style.card}>
       <img src={`https://image.tmdb.org/t/p/w500${content.poster_path}`} />

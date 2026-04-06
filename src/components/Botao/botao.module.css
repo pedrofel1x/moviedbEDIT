@@ -3,21 +3,21 @@ button {
   background: none;
   display: flex;
   gap: 4px;
-  border-radius: 20px
+  border-radius: 20px;
+  cursor: pointer;
 }
 
 button:hover {
-    background-color: lightgray;
+  background-color: lightgray;
 }
 
 .primary {
   background-color: white;
   padding: 4px 8px;
-  color:black;
+  color: black;
 }
 
 .secondary {
-    
   background-color: black;
   padding: 4px 8px;
   color: white;

@@ -1,0 +1,9 @@
+.chip {
+  border-radius: 10px;
+  background-color: #515053;
+  font-size: 16px;
+  padding: 5px;
+  gap: 5px;
+  margin: 2px;
+  opacity: 1;
+}

@@ -2,6 +2,7 @@ export interface ISerie {
     backdrop_path: string;
     first_air_date: string;
     genre_ids: number[];
+    genres?: { id: number; name: string }[];
     id: number;
     name: string;
     origin_country: string[];
