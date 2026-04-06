@@ -8,6 +8,7 @@ import Botao from "../components/Botao/Botao";
 import Chip from "../components/Chip/Chip";
 import type { ISerie } from "../types/Serie";
 import Star from "../components/Icons/Start";
+import Arrow from "../components/Icons/Arrow";
 
 function DetailsPage() {
   const { filme, serie } = useParams();
@@ -41,10 +42,14 @@ function DetailsPage() {
 
   return (
     <div className={styles.content}>
-      <Link to={filme ? "/moviesList" : "/seriesList"}>
-        <Botao variant="primary"> Back to list</Botao>
-      </Link>
-
+      <div className={styles.botao}>
+        <Link to={filme ? "/moviesList" : "/seriesList"}>
+          <Botao variant="primary">
+            {" "}
+            <Arrow />
+          </Botao>
+        </Link>
+      </div>
       <div className={styles.hero}>
         <div
           className={styles.backdrop}
@@ -62,8 +67,11 @@ function DetailsPage() {
             ))}
           </div>
           <div className={styles.rating}>
-            <span>{item?.vote_average.toFixed(1)}/10</span>
-            <Star />
+            <p>
+              {item?.vote_average.toFixed(1)}
+              <Star />
+            </p>
+            <p>{item?.release_date}</p>
           </div>
         </div>
       </div>
