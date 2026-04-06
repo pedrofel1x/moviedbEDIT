@@ -28,7 +28,6 @@ createRoot(document.getElementById("root")!).render(
           <Route path=":serie" element={<DetailsPage />} />
         </Route>
       </Routes>
-      <PopularList />
     </BrowserRouter>
     {/* <MoviesList />
     <SeriesList /> */}
