@@ -94,7 +94,11 @@ function DetailsPage() {
       </div>
       <div className={styles.casting}>
         <h3>Actors</h3>
-        <Actors filme_id={selected} type={filme ? "movie" : "tv"} />
+        <Actors
+          key={selected}
+           filme_id={selected}
+          type={filme ? "movie" : "tv"}
+        />
       </div>
       <div className={styles.similar}>
         <h3>Recommended</h3>
