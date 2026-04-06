@@ -15,7 +15,7 @@ function NavBar() {
           <Botao variant="secondary">Filmes</Botao>
         </Link>
         <Link to="seriesList">
-          <Botao variant="secondary">Séries</Botao>
+          <Botao variant="secondary">Series</Botao>
         </Link>
       </div>
     </nav>
