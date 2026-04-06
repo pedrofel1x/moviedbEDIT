@@ -19,7 +19,7 @@ function MoviesList() {
   const [inputText, setInputText] = useState("");
 
   const filteredMovies = movies.filter((movie) => {
-    const movieName = movie.original_title.toLowerCase();
+    const movieName = movie.title.toLowerCase();
     const input = inputText.toLowerCase();
     return movieName.includes(input);
   });
