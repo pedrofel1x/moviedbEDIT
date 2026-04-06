@@ -9,8 +9,8 @@ interface IMovieCard {
 function Card({ content }: IMovieCard) {
   const name =
     `original_title` in content
-      ? content.original_title
-      : content.original_name;
+      ? content.title
+      : content.name;
 
   return (
     <div className={style.card}>
