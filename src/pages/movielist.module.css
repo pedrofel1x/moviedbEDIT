@@ -38,7 +38,7 @@
   padding: 10px 16px;
   border-radius: 12px; /* Cantos bem arredondados */
   width: 100%;
-  max-width: 500px; /* Ajusta conforme o teu layout */
+  max-width: 800px; /* Ajusta conforme o teu layout */
   gap: 12px;
 }
 
