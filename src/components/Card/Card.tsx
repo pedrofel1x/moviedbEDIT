@@ -24,7 +24,9 @@ function Card({ content }: IMovieCard) {
     <div className={style.card}>
       <img src={`https://image.tmdb.org/t/p/w500${content.poster_path}`} />
       <div className={style.info}>
-        <strong>{name}</strong>
+        <div className={style.text}>
+          <strong>{name}</strong>
+        </div>
         <div className={style.starsRow}>
           {renderStars(content.vote_average)}
         </div>
