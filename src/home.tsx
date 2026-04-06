@@ -6,7 +6,7 @@ import UpComingList from "./pages/UpComingList";
 function Home() {
   return (
     <>
-      <h1>MovieDB EDIT</h1>
+      <h1>MovieDB</h1>
       <NowPlayingList />
       {/* <PopularList /> */}
       <UpComingList />
