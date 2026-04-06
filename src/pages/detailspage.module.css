@@ -1,18 +1,61 @@
 .content {
-  background-color: aqua;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
+.backdrop {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  background-size: cover;
+  background-position: center top;
+  overlay: auto;
+  z-index: -1;
+}
+
+.backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2) 0%,
+    /* topo - quase transparente */ rgba(161, 144, 144, 0.8) 100%
+      /* baixo - escuro */
+  );
+}
+.content > *:not(.backdrop) {
+  position: relative;
+  z-index: 1; /* ← conteúdo por cima */
+}
+.hero {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding: 2rem;
+}
 .poster {
-  background-color: aquamarine;
+  & img {
+    width: 250px;
+    border-radius: 16px;
+  }
 }
 .chips {
   background-color: blue;
 }
 
 .title {
-  background-color: yellow;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  flex-wrap: wrap;
 }
 
 .casting {
-  background-color: blueviolet;
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
 }

@@ -5,13 +5,15 @@ import Card from "../components/Card/Card";
 import Actors from "../components/Actors/Actors";
 import styles from "./detailspage.module.css";
 import Botao from "../components/Botao/Botao";
+import Chip from "../components/Chip/Chip";
+import type { ISerie } from "../types/Serie";
 
 function DetailsPage() {
   const { filme, serie } = useParams();
   console.log(filme);
 
   const selected = filme || serie;
-  const [item, setItem] = useState<IMovie>();
+  const [item, setItem] = useState<IMovie | ISerie>();
 
   useEffect(() => {
     const options = {
@@ -41,17 +43,30 @@ function DetailsPage() {
       <Link to={filme ? "/moviesList" : "/seriesList"}>
         <Botao variant="primary"> Back to list</Botao>
       </Link>
-      <div className={styles.poster}>
-        <h1>Imagem</h1>
+
+      <div className={styles.hero}>
+        <div
+          className={styles.backdrop}
+          style={{
+            backgroundImage: `url(https://image.tmdb.org/t/p/original${item?.backdrop_path})`,
+          }}
+        />
+        <div className={styles.poster}>
+          <img src={`https://image.tmdb.org/t/p/w500${item?.poster_path}`} />
+        </div>
+        <div></div>
+        <div className={styles.chips}>
+          {/* {item?.genres.map(genre) => (
+        <Chip key={genre.id} name={genre.name} /> 
+        )} */}
+        </div>
       </div>
-      <div className={styles.chips}>Chips</div>
       <div className={styles.title}>
-        <h2>{item?.original_title || item?.name}</h2>
-        <h4>{item?.overview}</h4>
+        <h2>{item?.original_title || item?.original_name}</h2>
+        <span>{item?.overview}</span>
       </div>
       <div className={styles.casting}>
-        Actors
-        <Actors filme_id={selected} />
+        <Actors filme_id={selected} type={filme ? "movie" : "tv"} />
       </div>
     </div>
   );
