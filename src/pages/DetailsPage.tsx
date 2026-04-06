@@ -41,11 +41,11 @@ function DetailsPage() {
       setItem(data);
 
       const similarResponse = await fetch(
-        `https://api.themoviedb.org/3/${type}/${selected}/similar?language=en-US&page=1`,
+        `https://api.themoviedb.org/3/${type}/${selected}/recommendations`,
         options,
       );
       const similarData = await similarResponse.json();
-      setSimilarMovies(similarData.results.slice(0, 6));
+      setSimilarMovies(similarData.results.slice(0, 8));
     };
     fetchData();
   }, [selected]);
@@ -114,6 +114,3 @@ function DetailsPage() {
 }
 
 export default DetailsPage;
-function setSimilarMovies(arg0: any) {
-  throw new Error("Function not implemented.");
-}
